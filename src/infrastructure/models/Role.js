@@ -5,6 +5,7 @@ module.exports = generateModel({
     schema: {
         name: {
             type: String,
+            enum: ["ADMIN", "CUSTOMER", "MERCHENT"],
             required: true,
         },
     },
