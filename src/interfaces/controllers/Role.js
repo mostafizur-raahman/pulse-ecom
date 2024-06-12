@@ -6,6 +6,15 @@ class RoleController extends Factory {
         super({ moduleName: "Role" });
     }
 
+    read = () => async (req, res, next) => {
+        const _read = this.createRead(
+            { sortOrder: "desc", sortField: "createdAt" },
+            "readRole"
+        );
+
+        await _read(req, res, next);
+    };
+
     async create(req, res, next) {
         try {
             const doc = await req.container
@@ -20,6 +29,12 @@ class RoleController extends Factory {
             next(error);
         }
     }
+
+    delete = () => async (req, res, next) => {
+        const _delete = this.createDelete(req.query?.id, "deleteRole");
+
+        return await _delete(req, res, next);
+    };
 }
 
 module.exports = RoleController;

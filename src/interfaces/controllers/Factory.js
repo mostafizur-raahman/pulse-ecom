@@ -59,7 +59,7 @@ class Factory {
 
             const status = await req.container.resolve(application).execute({
                 ids: operationIds,
-                userId: req.user._id,
+                userId: req.user?._id,
             });
 
             if (status.modifiedCount === 0)
