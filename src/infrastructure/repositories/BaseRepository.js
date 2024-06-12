@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-
+const { deletePropertiesFromObject } = require("../../shared/obj");
 class BaseRepository {
     constructor(model) {
         this.model = model;
@@ -38,6 +38,14 @@ class BaseRepository {
      */
     createObjectId(id) {
         mongoose.Types.ObjectId.createFromTime(id);
+    }
+
+    // clean response
+
+    cleanResponse(userData, propsToClean) {
+        const user = deletePropertiesFromObject(userData, propsToClean);
+
+        return user;
     }
 
     async createDocIfNotExist(query, entity, userId) {
